@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Hero, Todo, User
+from .models import Todo, User
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -7,12 +7,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ('id', 'username', 'password', 'is_user', 'is_admin')
 
-class HeroSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Hero
-        fields = ('id', 'name', 'alias')
-
-class TodoSerializer(serializers.HyperlinkedModelSerializer):
+class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
-        fields = ('id', 'task', 'completed', 'timestamp', 'updated', 'user')
+        fields = ('id', 'title', 'content', 'completed', 'user', 'timestamp', 'updated')

@@ -1,10 +1,9 @@
 from django.urls import include, path
 from rest_framework import routers
-from .views import HeroView, TodoView, UserView, check_credentials
+from .views import TodoView, UserView, check_credentials
 
 
 router = routers.DefaultRouter(trailing_slash=False)
-router.register(r'heroes', HeroView)
 router.register(r'todos', TodoView)
 router.register(r'users', UserView)
 
