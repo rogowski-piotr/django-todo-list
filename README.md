@@ -1,23 +1,42 @@
 # ToDo List Application
 
-## Quick Start
-Prepare Python env and fetch dependencies
 
+## Quick Start - Django backend
+
+Setup Python env and fetch dependencies
 ```shell script
+cd todo
 python -m venv env
-env\scripts\activate
+env\scripts\activate # Windows
+. env/bin/activate # MAC or Linux 
 pip install -r todo/requirements.txt
 ```
 
-Make/run migration and start server
+Prepare database structure
 ```shell script
-cd todo
 python manage.py makemigrations
 python manage.py migrate
-python manage.py runserver
 ```
 
 Init data
 ```shell script
-python3 manage.py loaddata initial_role_data.json
+python manage.py loaddata initial_role_data.json
+```
+
+Start server
+```shell script
+python manage.py runserver
+```
+
+
+## Quick Start - Vue.js Frontend
+
+Setup
+```shell script
+npm install
+```
+
+Run
+```shell script
+npm run serve -- --port 3000
 ```
