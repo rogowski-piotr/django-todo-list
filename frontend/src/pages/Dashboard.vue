@@ -2,13 +2,14 @@
   <div class="container-fluid">
     <div class="row">
       <h1>Dashboard</h1>
-      </div>
-      <TaskTable 
-        v-bind:todos="todos.filter(todo => !todo.completed)"
-        v-bind:showTableHead="true"/>
-      <TaskTable 
-        v-bind:todos="todos.filter(todo => todo.completed)"
-        v-bind:showTableHead="false"/>
+    </div>
+    <a class="btn btn-warning text-black my-2" v-bind:href="'/dodaj'">Dodaj zadanie</a>
+    <TaskTable 
+      v-bind:todos="todos.filter(todo => !todo.completed)"
+      v-bind:showTableHead="true"/>
+    <TaskTable 
+      v-bind:todos="todos.filter(todo => todo.completed)"
+      v-bind:showTableHead="false"/>
   </div>
 </template>
 

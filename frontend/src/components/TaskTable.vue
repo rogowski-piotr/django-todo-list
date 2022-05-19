@@ -3,19 +3,19 @@
         <table class="table table-hover text-center">
             <thead v-if="showTableHead">
             <tr>
-                <th scope="col">Tytuł</th>
-                <th scope="col">Stan</th>
-                <th scope="col">Akcje</th>
+                <th scope="col" style="width: 33%">Tytuł</th>
+                <th scope="col" style="width: 33%">Stan</th>
+                <th scope="col" style="width: 33%">Akcje</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="todo in todos" :key="todo.id">
-                <td>{{ todo.title }}</td>
-                <td>
+                <td style="width: 33%">{{ todo.title }}</td>
+                <td style="width: 33%">
                     <div v-if="todo.completed" class="badge badge-pill badge-success" style="font-size: 20px">Ukończone</div>
                     <div v-else class="badge badge-pill badge-danger" style="font-size: 20px">Nie skończone</div>
                 </td>
-                <td>
+                <td style="width: 33%">
                     <button v-if="showTableHead" class="btn btn-info text-white" @click="markAsDone(todo.id)"><i class="fa fa-check-square-o"></i></button>
                     <a class="btn btn-primary text-white mx-1" v-bind:href="'/todo/' + todo.id"><i class="far fa-eye"></i></a>
                     <button class="btn btn-danger text-white" @click="deleteOne(todo.id)"><i class="far fa-trash-alt"></i></button>
