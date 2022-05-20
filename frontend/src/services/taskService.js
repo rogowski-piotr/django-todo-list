@@ -3,6 +3,7 @@ import { userService } from '.';
 
 export const taskService = {
     fetchTasks,
+    fetchTask,
     updateTask,
     addTask
 };
@@ -45,6 +46,14 @@ function fetchTasks() {
         headers: authHeader()
     };
     return fetch(`http://localhost:8000/todos`, requestOptions).then(handleResponse);
+}
+
+function fetchTask(id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(`http://localhost:8000/todos/${id}`, requestOptions).then(handleResponse);
 }
 
 function updateTask(id) {

@@ -1,24 +1,27 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid" style="padding: 0">
+    <Navbar/>
     <div class="row">
-      <h1>Dashboard</h1>
+      <div class="col-8 mx-sm-auto p-4">
+        <a class="btn btn-warning text-black my-2" v-bind:href="'/dodaj'">Dodaj zadanie</a>
+        <TaskTable 
+          v-bind:todos="todos.filter(todo => !todo.completed)"
+          v-bind:showTableHead="true"/>
+        <TaskTable 
+          v-bind:todos="todos.filter(todo => todo.completed)"
+          v-bind:showTableHead="false"/>
+      </div>
     </div>
-    <a class="btn btn-warning text-black my-2" v-bind:href="'/dodaj'">Dodaj zadanie</a>
-    <TaskTable 
-      v-bind:todos="todos.filter(todo => !todo.completed)"
-      v-bind:showTableHead="true"/>
-    <TaskTable 
-      v-bind:todos="todos.filter(todo => todo.completed)"
-      v-bind:showTableHead="false"/>
   </div>
 </template>
 
 <script>
 import { taskService } from '../services';
-import TaskTable from '../components/TaskTable'
+import TaskTable from '../components/TaskTable';
+import Navbar from '../components/Navbar';
 
 export default {
-  components: { TaskTable },
+  components: { TaskTable, Navbar },
   name: 'Dashboard',
   data () {
     return { todos: [] }

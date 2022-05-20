@@ -2,11 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Login from '../pages/Login.vue';
 import Dashboard from '../pages/Dashboard.vue';
 import AddTaks from '../pages/AddTaks.vue';
+import ShowTask from '../pages/ShowTask.vue';
 
 
 const routes = [
     { path: '/login', component: Login },
     { path: '/dodaj', component: AddTaks },
+    { path: '/zadanie/:id', component: ShowTask },
     { path: '/', component: Dashboard },
     {
       path: "/:catchAll(.*)",

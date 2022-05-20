@@ -1,7 +1,8 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid" style="padding: 0">
+    <Navbar/>
     <div class="row">
-      <div class="col-md-9 ml-sm-auto col-lg-10 p-4">
+      <div class="col-8 mx-sm-auto p-4">
 
         <a href="/"><i class="fa fa-chevron-left" aria-hidden="true"></i> powrót</a>
         <hr/>
@@ -34,14 +35,14 @@
                     <th scope="row">Treść zadania</th>
                     <td></td>
                     <td>
-                        <input type="text" id="name" class="form-control" v-model="payload.content">
+                        <textarea class="form-control" v-model="payload.content"></textarea>
                     </td>
                 </tr>
             </table>
 
             <br/>
             <div class="text-center">
-                <button @click="add" type="button" class="btn btn-primary">Add</button>
+                <button @click="add" type="button" class="btn btn-primary">Dodaj</button>
             </div>
         </div>
       </div>
@@ -51,9 +52,11 @@
 
 <script>
 import { taskService } from '../services';
+import Navbar from '../components/Navbar';
 
 export default {
   name: 'AddTaks',
+  components: { Navbar },
   data () {
         return {
             addStatus: null,
@@ -72,8 +75,9 @@ export default {
       }
       taskService.addTask(this.payload)
         .then(response => {
+          console.log(response);
           this.addStatus = response.status == 201 ? true : false;
-      })
+      }).catch(() => this.addStatus = false);
     },
     validatePayload() {
       return (this.payload.title != null && this.payload.title.length > 0)
