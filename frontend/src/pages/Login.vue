@@ -1,12 +1,11 @@
 <template>
 
 <div>
+    <div class="alert alert-success m-0" v-if="createdUser" role="alert" id="alert-incorrect-data">
+        <h4 class="alert-heading">Zarejestrowano użytkownika!</h4>
+    </div>
     <div class="alert alert-warning m-0" v-show="errorMessage != null" role="alert" id="alert-incorrect-data">
-        <h4 class="alert-heading">Incorrect login details!</h4>
-        <div v-for="msg in errorMessage" :key="msg.id">
-            <hr>
-            {{ msg }}
-        </div>
+        <h4 class="alert-heading">Niepoprawne dane logowania!</h4>
     </div>
     <div class="bg-secondary vh-100"></div>
 
@@ -14,25 +13,25 @@
         <div class="modal-dialog modal-login">
             <div class="modal-content bg-light">
                 <div class="modal-header">				
-                    <h4 class="modal-title">Login</h4>
+                    <h4 class="modal-title">Formularz logowania</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <i class="fa fa-user p-1"></i>
-                        <label>Email or Username</label>
-                        <input type="text" class="form-control" placeholder="Username" v-model="name"/>
+                        <label>Nazwa użytkownika</label>
+                        <input type="text" class="form-control" placeholder="Nazwa użytkownika" v-model="name"/>
                     </div>
                     <div class="form-group">
                         <i class="fa fa-lock p-1"></i>
-                        <label>Password</label>
-                        <input type="password" class="form-control" placeholder="Password" v-model="password"/>				
+                        <label>Hasło</label>
+                        <input type="password" class="form-control" placeholder="Hasło" v-model="password"/>				
                     </div>
                     <div class="form-group">
-                        <button @click="validateAuth" type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+                        <button @click="validateAuth" type="submit" class="btn btn-primary btn-block btn-lg">Zaloguj</button>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="/signup">signup</a> if you don't have an account
+                    <a href="/rejestracja">Zarejestruj się </a> jeśli nie masz konta w systemie
                 </div>
             </div>
         </div>
@@ -45,34 +44,30 @@ import router from '../helpers/router';
 import { userService } from '../services';
 
 export default {
-  name: 'Login',
-  data() {
-    return {
-        name: null,
-        password: null,
-        errorMessage: null,
-    }
-  },
-  created () {
-        userService.logout()
+    name: 'Login',
+    data() {
+        return {
+            name: null,
+            password: null,
+            errorMessage: null,
+            createdUser: false,
+        }
     },
-  methods: {
-    validateAuth() {
-        userService.login(this.name, this.password)
+    created () {
+        userService.logout()
+        this.createdUser = this.$route.query.createdUser;
+    },
+    methods: {
+        validateAuth() {
+            userService.login(this.name, this.password)
                 .then(() => console.log('redirecting'))
                 .then(router.push({path: "/"}))
                 .then(() => window.location.href = '/')
-                .catch(errorMsg => this.errorMessage = this.parseErrorMsg(errorMsg));
-    },
-    parseErrorMsg(errorMsg) {
-        var msg = [];
-        var keys = Object.keys(errorMsg);
-        keys.forEach(function(key) {
-            msg.push(key + ' ' + errorMsg[key]);
-        });
-        console.log(msg);
-        return msg;
-    },
-  }
+                .catch(() => {
+                    this.errorMessage = ' ';
+                    this.createdUser = false;
+                });
+        },
+    }
 }
 </script>

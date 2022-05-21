@@ -4,10 +4,12 @@ import Dashboard from '../pages/Dashboard.vue';
 import AddTaks from '../pages/AddTaks.vue';
 import ShowTask from '../pages/ShowTask.vue';
 import Admin from '../pages/Admin.vue';
+import Register from '../pages/Register.vue';
 
 
 const routes = [
     { path: '/login', component: Login },
+    { path: '/rejestracja', component: Register },
     { path: '/dodaj', component: AddTaks },
     { path: '/zadanie/:id', component: ShowTask },
     { path: '/', component: Dashboard },
@@ -29,7 +31,7 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/login'/*, '/signup'*/];
+    const publicPages = ['/login', '/rejestracja'];
     const adminPages = [ '/admin' ];
     const authRequired = !publicPages.includes(to.path);
     const adminRequired = adminPages.includes(to.path);

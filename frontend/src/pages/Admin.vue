@@ -3,7 +3,7 @@
     <Navbar/>
     <div class="row">
       <div class="col-8 mx-sm-auto p-4">
-        <h1>ADMIN</h1>
+        <h2 class="mb-3">Panel administratora - podgląd użytkowników</h2>
         <UserTable/>
       </div>
     </div>

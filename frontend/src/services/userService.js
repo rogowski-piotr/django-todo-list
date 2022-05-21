@@ -5,7 +5,8 @@ export const userService = {
     login,
     logout,
     fetchUsers,
-    deleteOne
+    deleteOne,
+    register
 };
 
 function handleResponse(response) {
@@ -57,6 +58,15 @@ function deleteOne(id) {
         headers: authHeader()
     };
     return fetch(`http://localhost:8000/users/${id}`, requestOptions).then(handleResponse);
+}
+
+function register(payload) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    };
+    return fetch(`http://localhost:8000/users`, requestOptions);
 }
 
 function logout() {
