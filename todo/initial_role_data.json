@@ -4,7 +4,7 @@
        "pk": 1,
        "fields": {
           "username": "admin",
-          "password": "admin",
+          "password": "21232f297a57a5a743894a0e4a801fc3",
           "is_user": true,
           "is_admin": true
        }
@@ -14,7 +14,7 @@
         "pk": 2,
         "fields": {
            "username": "user",
-           "password": "user",
+           "password": "ee11cbb19052e40b07aac0ca060c23ee",
            "is_user": true,
            "is_admin": false
         }

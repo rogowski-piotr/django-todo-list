@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
+import hashlib
 
 
 class ActionBasedPermission(AllowAny):
@@ -49,6 +50,8 @@ class UserView(viewsets.ModelViewSet):
     def create(self, request):
         request.data['is_user'] = True
         request.data['is_admin'] = False
+        passwordHash = hashlib.md5(str(request.data['password']).encode())
+        request.data['password'] = passwordHash.hexdigest()
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
