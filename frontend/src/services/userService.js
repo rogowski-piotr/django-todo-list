@@ -1,9 +1,11 @@
-// import { authHeader } from '../helpers/auth-header';
+import { authHeader } from '../helpers/auth-header';
 // import { getApiOrigin } from '../helpers/api-origin';
 
 export const userService = {
     login,
-    logout
+    logout,
+    fetchUsers,
+    deleteOne
 };
 
 function handleResponse(response) {
@@ -39,6 +41,22 @@ function login(name, password) {
             }
             return user;
         });
+}
+
+function fetchUsers() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(`http://localhost:8000/users`, requestOptions).then(handleResponse);
+}
+
+function deleteOne(id) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: authHeader()
+    };
+    return fetch(`http://localhost:8000/users/${id}`, requestOptions).then(handleResponse);
 }
 
 function logout() {
